@@ -1,0 +1,269 @@
+/* 기본 스타일 초기화 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+    margin: 0;
+}
+
+/* 헤더 스타일 */
+header {
+    float:left;
+    width:100%;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style: none;
+    padding: 0;
+    float:left;
+    width:100%;
+}
+
+nav ul li {
+    float:left;
+    width:25%;
+}
+
+nav ul li a {
+    font-size: 18px;
+    font-weight:bold;
+    padding:10px 0;
+    float:left;
+    width:100%;
+    color: #fff;
+    text-decoration: none;
+}
+nav ul li a:hover{
+    background-color: #eee;
+    color:#333;
+}
+
+/* 메인 컨텐츠와 사이드바 레이아웃 */
+main {
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+/* 메인 컨텐츠 스타일 */
+.inputform {
+    
+    flex: 3;
+    padding-right: 20px;
+}
+
+article {
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 사이드바 스타일 */
+.result {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* 푸터 스타일 */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px 0;
+    margin-top: 20px;
+}
+.logo {
+    padding:20px 0;
+}
+.logo a{
+    font-weight:bold;
+    font-size:42px;
+    font-family:"Agency FB";
+}
+.logo span{
+    font-weight:bold;
+    font-size:50px;
+    font-family:"Agency FB";
+    background-color: #333;
+    color:#eee;
+    padding:0 10px;
+}
+header a{
+    color:#333;
+    text-decoration-line:none;
+}
+.inputform ul li {list-style: none;}
+/* 반응형 디자인 */
+@media (max-width: 768px) {
+    main {
+        flex-direction: column;
+    }
+
+    .content {
+        padding-right: 0;
+    }
+
+    .sidebar {
+        margin-top: 20px;
+    }
+}
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin-bottom: 15px;
+}
+
+ul li {
+    font-size: 14px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+input[type="text"], input[type="radio"], input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    width: 100%;
+    margin-top: 5px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+input[type="radio"] {
+    width: auto;
+    margin-right: 5px;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+    outline: none;
+    border-color: #007bff;
+}
+
+li input[type="radio"] + label {
+    margin-right: 20px;
+}
+
+li label {
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+::placeholder {
+    color: #888;
+}
+
+ul li * {
+    margin-top: 10px;
+}
+.button-li{
+    width:100%; text-align: center ;
+}
+form input[type="submit"] {
+    background-color: #303665;
+    color: white;
+    padding: 12px 20px 14px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+form input[type="submit"]:hover {
+    background-color: #16192e;
+    transform: scale(1.05);
+}
+
+form input[type="submit"]:active {
+    background-color: #16192e;
+    transform: scale(0.95);
+}
+
+form input[type="submit"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
+}
+
+#resultArea {
+    color:#0056b3;
+}
+
+#titleArea{
+    color:#2d3676;
+}
+.file-input {
+    display: none;
+}
+
+.custom-file-upload {
+    display: inline-block;
+    padding: 15px 32px;
+    cursor: pointer;
+    background-color: #21584d;
+    color: #fff;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+}
+
+.custom-file-upload:hover {
+    background-color: #15443b;
+}
+#image-preview{display: none;}
+.image-view{max-height:200px;}
+article > div {display: none;}
+#spaceshipModel {display: block;}
+.image_list{width:50%; float:left;}
+.image_list li{width:100%; float:left;}
+.image_list > li:first-child{font-size: 20px; text-align: center;}
+.image_list > li:last-child{box-shadow: 0 0 0 1px #888 inset; background-color: #ddd; text-align: center; height:230px;}
+.upload-li {text-align: center;}
+
+#shopForm label {
+    display: block;
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* 텍스트박스 (textarea) 스타일 */
+#shopForm textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 16px;
+    font-family: 'Arial', sans-serif;
+    resize: none; /* 리사이징 방지 */
+    outline: none; /* 포커스 시 아웃라인 제거 */
+    margin-bottom: 15px;
+    transition: border-color 0.3s ease;
+}
+
+#shopForm textarea:focus {
+    border-color: #0056b3; /* 포커스 시 테두리 색 변경 */
+}

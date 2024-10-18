@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Page </title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <header>
+        <div class="logo"><a href="/"><span>PHJ Python Project</span></a></div>
+        <nav>
+          <ul>
+            <li><a id="menu1" onclick="changedisplay(0)">우주타이타닉 생존분류</a></li>
+            <li><a id="menu2" onclick="changedisplay(1)">mbti 분류</a></li>
+            <li><a id="menu3" onclick="changedisplay(2)">피부질환 분류</a></li>
+            <li><a id="menu4" onclick="changedisplay(3)">쇼핑몰 리뷰 분류</a></li>
+          </ul>
+        </nav>
+    </header>
+    <main>
+        <section class="inputform">
+            <article>
+                <div id="spaceshipModel">
+                    <form action="/" method="post" id="spaceshipForm">
+                        <ul>
+                            <li><input type="number" name="spa" id="" placeholder="스파에 쓴 금액 $(달러)" min="0"></li>
+                            <li><input type="number" name="vrdeck" id="" placeholder="VR에 쓴 금액 $(달러)" min="0"></li>
+                            <li><input type="number" name="room" id="" placeholder="룸서비스에 쓴 금액 $(달러)" min="0"></li>
+                            <li><input type="number" name="foodcort" id="" placeholder="푸드코트에 쓴 금액 $(달러)" min="0"></li>
+                            <li><input type="number" name="shop" id="" placeholder="쇼핑몰에서 쓴 금액 $(달러)" min="0"></li>
+                            <li><input type="number" name="age" id="" placeholder="나이" min="0"></li>
+                            <li><input type="radio" name="eTrue" id="eTrue" value=1 checked>
+                                <label for="eTrue">유럽 </label> 
+                                <input type="radio" name="eTrue" id="eFalse" value=0>
+                                <label for="eFalse">비유럽 </label> 
+                                * 유럽에서 왔는지 확인 여부</li>
+                            <li><input type="radio" name="erTrue" id="erTrue" value=1 checked>
+                                <label for="erTrue">지구 </label> 
+                                <input type="radio" name="erTrue" id="erFalse" value=0>
+                                <label for="erFalse">비지구 </label> 
+                                * 지구에서 왔는지 확인 여부</li>
+                            <li><input type="radio" name="sTrue" id="sTrue" value=1 checked>
+                                <label for="sTrue">동면 </label> 
+                                <input type="radio" name="sTrue" id="sFalse" value=0>
+                                <label for="sFalse">비동면 </label> 
+                                * 동면중인지 확인 여부</li>
+                                <input type="hidden" name="sFalse" id="hFalse">
+                            <li class="button-li"><input type="submit" id="spaceshipBtn" value="생존여부확인"></input></li>
+                        </ul>
+                    </form>
+                </div>
+                <div id="mbtiModel">
+                    <form action="/" method="post" id="mbtiForm">
+                        <ul>
+                            <li><input type='text' name='word1' placeholder='영어만 입력해주세요'></li>
+                            <li><input type='text' name='word2' placeholder='영어만 입력해주세요'></li>
+                            <li><input type='text' name='word3' placeholder='영어만 입력해주세요'></li>
+                            <li><input type='text' name='word4' placeholder='영어만 입력해주세요'></li>
+                            <li><input type='text' name='word5' placeholder='영어만 입력해주세요'></li>
+                            <li class="button-li"><input type="submit" value="mbti 진단"></li>
+                        </ul>
+                    </form>
+                </div>
+                <div id="skinModel">
+                    <form id="upload-form" action="" method="POST" enctype="multipart/form-data">
+                        <ul>
+                            <li class="upload-li">
+                                <label for="file-upload" class="custom-file-upload">
+                                    이미지 선택
+                                </label>
+                                <input id="file-upload" class="file-input" type="file" accept="image/*" name="image">
+                            </li>
+                            <li>
+                                <ul class="image_list">
+                                    <li>이미지 프리뷰</li>
+                                    <li><img id="image-preview" class="image-view" alt="Image Preview"></li>
+                                </ul>
+                                <ul class="image_list">
+                                    <li>이미지 예제</li>
+                                    <li><img src="{{ url_for('static', filename='images/skin_example.jpg') }}" id="image-example" class="image-view" alt="Image Example"></li>
+                                </ul>
+                            </li>
+                            <li class="button-li"><input type="submit" value="사진업로드"></input></li>
+                        </ul>
+                    </form>
+                </div>
+                <div id="shopModel">
+                    <form action="/" method="post" id="shopForm">
+                        <label for="review">리뷰 입력:</label>
+                        <textarea name="review" id="review" rows="6" required></textarea>
+                        <input type="submit" value="분석하기">
+                    </form>
+                </div>
+            </article>
+        </section>
+        <section class="result">
+            <ul>
+                <li><h2>모델명</h2></li>
+                <li><h2 id="titleArea">우주타이타닉</h2></li>
+            </ul>
+            <ul>
+                <li><h3>결과</h3></li>
+                <li><h3 id="resultArea"></h3></li>
+            </ul>
+        </aside>
+    </main>
+    <footer>
+        <p>&copy; 2024 My Blog. All rights reserved.</p>
+    </footer>
+    <style>
+        #one {display: none;}
+    </style>
+    <script>
+        var sectionList = ["spaceship","mbti","skin","shop"]
+        var menuList = ["우주타이타닉 생존분류","mbti 분류","피부질환 분류","쇼핑몰리뷰 분류"]
+        var myIdx = 0
+        function changedisplay(disid){
+            event.preventDefault();
+            for(var i = 0; i<=sectionList.length; i++){
+                $('#'+sectionList[i]+'Model').css('display', disid === i ? 'block' : 'none');
+            }
+            $('#titleArea').text(menuList[disid]);
+            myIdx = disid
+        }
+        function ajaxPost(link,formData,myIdx){
+            $.ajax({
+                type: 'POST',
+                url: link, // Flask 엔드포인트
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    var result = ""
+                    if(myIdx === 0 || myIdx === 2) result = response
+                    else if(myIdx === 1) result = 'MBTI '+response['mbti'] +'일 확률 '+ response['score']
+                    else if(myIdx === 3){
+                        // name과 age 리스트를 동시에 반복
+                        const category = response.category;
+                        const target = response.target;
+
+                        for (let i = 0; i < category.length; i++) {
+                            result += `${category[i]} : ${target[i]}\n`;
+                        }
+                    }
+                    if(myIdx ===0){
+                        if (response === "사망")$('#resultArea').css("color","red")
+                        else $('#resultArea').css("color","blue")
+                    }
+                    $('#resultArea').text(result);
+                    console.log(response);
+                },
+                error: function(error) {
+                    
+                    console.log(error);
+                }
+            });
+        }
+        $('form').on('submit', function(event) {
+            event.preventDefault(); // 폼의 기본 제출 동작을 막음
+            if (myIdx === 0) {
+                $('#hFalse').val(1 - $("input[name='sTrue']:checked").val());
+            }
+
+            var formData = new FormData();  // FormData 객체 생성
+
+            if (myIdx === 2) {
+                const fileInput = $('#file-upload')[0].files[0];  // 파일 가져오기
+                formData.append('image', fileInput);  // 파일 추가 (name="image")
+            } else {
+                // 폼 데이터를 가져오기 (일반 폼 데이터는 serialize() 사용)
+                var serializedData = $(this).serializeArray();
+                serializedData.forEach(function(item) {
+                    formData.append(item.name, item.value);  // 일반 폼 데이터도 FormData에 추가
+                });
+            }
+
+            // AJAX 요청
+            ajaxPost('/' + sectionList[myIdx], formData, myIdx);
+        });
+
+        $('input[type="number"]').on('input', function() {
+            var value = $(this).val();
+            // 숫자만 남기고 필터링
+            $(this).val(value.replace(/[^0-9]/g, ''));
+        });
+        $('#mbtiForm input[type="text"]').on('input', function() {
+            var value = $(this).val();
+            // 영어만 허용 (대소문자 구분없이)
+            $(this).val(value.replace(/[^a-zA-Z]/g, ''));
+        });
+        $('#review').on('input', function() {
+            var value = $(this).val();
+            // 한글과 특수문자만 허용
+            $(this).val(value.replace(/[^가-힣ㄱ-ㅎㅏ-ㅣ!"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~]/g, ''));
+        });
+
+        $('#file-upload').on('change', function(event) {
+            const preview = $('#image-preview');  // jQuery 선택자를 사용
+            const file = event.target.files[0];
+            
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.attr('src', e.target.result);
+                    preview.show();
+                }
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>리뷰 분석기</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>리뷰 분석기</h1>
+        <form method="POST">
+            <label for="model">모델 선택:</label>
+            <select name="model" id="model">
+                {% for category in category_name %}
+                    <option value="{{ loop.index0 }}" {% if selected_model == loop.index0 %}selected{% endif %}>{{ category }}</option>
+                {% endfor %}
+            </select>
+            <label for="review">리뷰 입력:</label>
+            <textarea name="review" id="review" rows="6" required>{{ review }}</textarea>
+            <button type="submit">분석하기</button>
+        </form>
+
+        {% if outputdata %}
+            <div class="result">
+                <h2>분석 결과</h2>
+                <p><strong>모델:</strong> {{ category_name[selected_model] }}</p>
+                <p><strong>리뷰:</strong> {{ review }}</p>
+                <ul>
+                    {% for data in outputdata %}
+                        <li>{{ data[0] }}: {{ data[1] }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+</body>
+</html>
